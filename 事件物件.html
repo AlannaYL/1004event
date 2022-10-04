@@ -12,18 +12,48 @@
     <a href="https://google.com" id="link">Google</a>
     <p>按了<span id="key"></span>鍵</p>
     <input type="range" id="range" min="0" max="100" step="5" value="0">
+
+    <hr>
+
+    <input type="text" name="" id="input-text">
+    <br>
+    <p id="input-msg"></p>
     <script>
         const link = document.getElementById('link')
         link.onclick = (event) => {
             event.preventDefault()
-            console.log(event)
+            // console.log(event)
             event.target.innerText = '不會跳頁'
         }
 
         const key = document.getElementById('key')
         document.onkeydown = event => {
-            console.log(event)
+            // console.log(event)
             key.innerText = event.key
+        }
+
+        const inputText = document.getElementById('input-text')
+        const inputMsg = document.getElementById('input-msg')
+        inputText.onfocus = () => {
+            console.log('focus')
+        }
+        inputText.onblur = () => {
+            console.log('blur')
+        }
+        inputText.oninput = () => {
+            console.log('input')
+        }
+
+        inputText.onchange = event => {
+            console.log('change')
+            const match = event.target.value.match(/[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+/g)
+            if (match) {
+                inputMsg.style.color = 'green'
+                inputMsg.innerText = '驗證成功'
+            } else {
+                inputMsg.style.color = 'red'
+                inputMsg.innerText = '信箱格式錯誤'
+            }
         }
     </script>
 </body>

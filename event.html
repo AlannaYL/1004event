@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="按鈕" onclick="alert('喵嗚')">
+    <input type="button" value="0" onclick="this.value++">
+    <input type="button" value="meow" onclick="onmeowButtonClick()">
+    <hr>
+
+    <input type="button" value="按鈕btn" class="btn">
+    <input type="button" value="按鈕btn" class="btn">
+    <input type="button" value="按鈕btn" class="btn">
+    <input type="button" value="按鈕btn" class="btn">
+    <input type="button" value="按鈕btn" class="btn">
+    <input type="button" value="按鈕btn" class="btn">
+
+    <br>
+
+    <input type="button" value="btn解除綁定" id="btn-Unbind">
+
+    <script>
+        const onmeowButtonClick = () => {
+            const meow = new Audio()
+            meow.src = ('./meow.mp3')
+            meow.play()
+        }
+
+        const sayHi = () => {
+            alert('Hi')
+        }
+
+        const btns = document.getElementsByClassName('btn')
+        for (const btn of btns) {
+            // btn.onclick = () => {
+            //     onOoButtonClick()
+            // }
+            btn.addEventListener('click', onmeowButtonClick)
+            btn.addEventListener('click', sayHi)
+        }
+
+        const btnUnbind = document.getElementById('btn-Unbind')
+        btnUnbind.onclick = () => {
+            for (const btn of btns) {
+                // btn.onclick = null
+                btn.removeEventListener('click', sayHi)
+            }
+        }
+    </script>
+</body>
+
+</html>

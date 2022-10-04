@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            float: left;
+            border: 1px solid #000;
+            background: rgb(255, 255, 255);
+        }
+
+        #color {
+            display: inline-block;
+            width: 300px;
+            position: absolute;
+            top: 45%;
+            left: 0;
+            margin-left: 3px;
+        }
+
+        #color input {
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <span id="color">
+        <input type="range" value="0" min="0" max="255"><button>隨機</button>
+        <input type="range" value="0" min="0" max="255"><button>隨機</button>
+        <input type="range" value="0" min="0" max="255"><button>隨機</button>
+    </span>
+</body>
+<script>
+    const box = document.getElementById('box')
+    const inputs = document.getElementsByTagName('input')
+    const buttons = document.getElementsByTagName('button')
+
+    for (const input of inputs) {
+        const oninput = () => {
+            let num = input.value
+        }
+        input.addEventListener('mousemove', oninput)
+        box.style.backgroundColor = 'rgb(' + num + num + num + ')'
+    }
+
+
+</script>
+
+</html>

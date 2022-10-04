@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #loading {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            color: darkolivegreen;
+            text-align: center;
+            display: table;
+            transition: opacity, 5s;
+        }
+
+        #loading-content {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #content img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading">
+        <div id="loading-content">
+            <img src="./loading.svg" alt="">
+            <h1>載入中</h1>
+            <p id="loading-Progress">%</p>
+        </div>
+    </div>
+
+    <div id="content">
+        <img src="https://images.unsplash.com/photo-1496318447583-f524534e9ce1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format"
+            alt="">
+        <img src="https://images.unsplash.com/photo-1491929007750-dce8ba76e610?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format"
+            alt="">
+        <img src="https://images.unsplash.com/photo-1577003811926-53b288a6e5d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format"
+            alt="">
+    </div>
+    <script>
+        const loading = document.getElementById('loading')
+        const loadingProgress = document.getElementById('loading-Progress')
+        const images = document.getElementsByTagName('img')
+        let loaded = 0
+        // loading.onreadystatechange = () => {
+        //     console.log(document.readyState)
+        // }
+
+        for (image of images) {
+            image.onload = () => {
+                loaded++
+                loadingProgress.innerText = Math.round(loaded / images.length * 100) + '%'
+            }
+
+        }
+
+        window.onload = () => {
+            console.log('window onload')
+            loading.style.opacity = 0
+            setTimeout(() => {
+                loading.style.display = 'none'
+            }, 5000)
+        }
+    </script>
+</body>
+
+</html>

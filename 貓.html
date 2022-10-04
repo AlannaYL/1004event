@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #game {
+      width: calc(100vw - 50px);
+      border: 5px solid blue;
+      height: calc(100vh - 50px);
+      position: relative;
+    }
+
+    #cat {
+      position: absolute;
+      width: 100px;
+      height: 56px;
+      opacity: 0;
+      user-select: none;
+
+    }
+  </style>
+</head>
+
+<body>
+  <input type="button" value="開始" id="start">
+  <div id="game">
+    <img src="./cat.jpg" id="cat">
+  </div>
+  <audio src="./meow.mp3" volume="1"></audio>
+
+  <script>
+    const start = document.getElementById('start')
+    const game = document.getElementById('game')
+    const cat = document.getElementById('cat')
+    const audio = document.getElementById('audio')
+    const timetext = document.getElementById('timetext')
+    let time = 0
+    let timer = 0
+    start.onclick = () => {
+      start.ariaDisabled = true
+      time = 0
+      const sec = time / 10
+      timetext.innerText = sec%1===0?`${sec}.0`
+      cat.style.top = Math.round(Math.random() * 90) + '%'
+      cat.style.left = Math.round(Math.random() * 90) + '%'
+      timer = setInterval(() => {
+        time++
+        if (time % 20 === 0) {
+          audio.play()
+        }
+      }, 100)
+    }
+    const gameMaxDistance = Math.sqrt(Math.pow(game.clientWidth, 2) + Math.pow(game.clientHeight, 2))
+    game.onmousemove = event => {
+      const mouseX = event.offsetX
+      const mouseY = event.offsetY
+      const catX = cat.offsetLeft
+      const catY = cat.offsetTop
+      const distance = Math.sqrt(Math.pow(Math.abs(mouseX - catX, 2))) + Math.pow(Math.abs(Math.abs(mouseY - catY), 2))
+      audio.volume = 1 - (distance / gameMaxDistance)
+    }
+
+    cat.onclick = () => {
+      if(!start.disable)
+      cat.style.opacity = 1
+      clearInterval(timer)
+      alert(`你花了 ${time}秒`)
+
+    }
+  </script>
+</body>
+
+</html>

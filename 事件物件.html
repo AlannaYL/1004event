@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="https://google.com" id="link">Google</a>
+    <p>按了<span id="key"></span>鍵</p>
+    <input type="range" id="range" min="0" max="100" step="5" value="0">
+    <script>
+        const link = document.getElementById('link')
+        link.onclick = (event) => {
+            event.preventDefault()
+            console.log(event)
+            event.target.innerText = '不會跳頁'
+        }
+
+        const key = document.getElementById('key')
+        document.onkeydown = event => {
+            console.log(event)
+            key.innerText = event.key
+        }
+    </script>
+</body>
+
+</html>

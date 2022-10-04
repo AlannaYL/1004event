@@ -20,56 +20,67 @@
       height: 56px;
       opacity: 0;
       user-select: none;
-
+      -webkit-user-drag: none;
     }
   </style>
 </head>
 
 <body>
   <input type="button" value="開始" id="start">
+  <span id="timetext">0</span>
   <div id="game">
     <img src="./cat.jpg" id="cat">
   </div>
-  <audio src="./meow.mp3" volume="1"></audio>
-
+  <audio src="./meow.mp3" volume="0" id="audio"></audio>
   <script>
     const start = document.getElementById('start')
     const game = document.getElementById('game')
     const cat = document.getElementById('cat')
     const audio = document.getElementById('audio')
     const timetext = document.getElementById('timetext')
+
     let time = 0
     let timer = 0
-    start.onclick = () => {
-      start.ariaDisabled = true
-      time = 0
+
+    const formatSecond = (time) => {
       const sec = time / 10
-      timetext.innerText = sec%1===0?`${sec}.0`
+      return sec % 1 === 0 ? `${sec}.0` : sec
+    }
+
+    start.onclick = () => {
+      start.disabled = true
+      time = 0
+      cat.style.opacity = 0
+      timetext.innerText = formatSecond(time)
       cat.style.top = Math.round(Math.random() * 90) + '%'
       cat.style.left = Math.round(Math.random() * 90) + '%'
       timer = setInterval(() => {
         time++
+        timetext.innerText = formatSecond(time)
         if (time % 20 === 0) {
           audio.play()
         }
       }, 100)
     }
+
     const gameMaxDistance = Math.sqrt(Math.pow(game.clientWidth, 2) + Math.pow(game.clientHeight, 2))
+
     game.onmousemove = event => {
       const mouseX = event.offsetX
       const mouseY = event.offsetY
       const catX = cat.offsetLeft
       const catY = cat.offsetTop
-      const distance = Math.sqrt(Math.pow(Math.abs(mouseX - catX, 2))) + Math.pow(Math.abs(Math.abs(mouseY - catY), 2))
+      const distance = Math.sqrt(Math.pow(Math.abs(mouseX - catX), 2) + Math.pow(Math.abs(mouseY - catY), 2))
       audio.volume = 1 - (distance / gameMaxDistance)
     }
 
     cat.onclick = () => {
-      if(!start.disable)
+      if (!start.disabled) return
+
       cat.style.opacity = 1
       clearInterval(timer)
-      alert(`你花了 ${time}秒`)
-
+      alert(`你花了 ${formatSecond(time)} 秒`)
+      start.disabled = false
     }
   </script>
 </body>

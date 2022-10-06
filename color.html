@@ -37,22 +37,48 @@
 <body>
     <div id="box"></div>
     <span id="color">
-        <input type="range" value="0" min="0" max="255" step="1"><button>隨機</button>
-        <input type="range" value="0" min="0" max="255" step="1"><button>隨機</button>
-        <input type="range" value="0" min="0" max="255" step="1"><button>隨機</button>
+        <input type="range" value="0" min="0" max="255" step="1"><button class="btn">隨機</button>
+        <p>0</p>
+        <input type="range" value="0" min="0" max="255" step="1"><button class="btn">隨機</button>
+        <p>0</p>
+        <input type="range" value="0" min="0" max="255" step="1"><button class="btn">隨機</button>
+        <p>0</p>
     </span>
 </body>
 <script>
     const box = document.getElementById('box')
-    const inputs = document.getElementsByTagName('input')
-    const buttons = document.getElementsByTagName('button')
+    const ps = document.getElementsByTagName('p')
+    // let color = [0, 0, 0]
 
-    for (const input of inputs) {
-        const oninput = () => {
-            let num = input.value
-        }
-        input.addEventListener('mousemove', oninput)
-        box.style.backgroundColor = 'rgb(' + num + num + num + ')'
+    // 搖桿
+    const inputs = document.getElementsByTagName('input')
+    const inputColor = () => {
+        let r = inputs[0].value
+        let g = inputs[1].value
+        let b = inputs[2].value
+        let newColor = [r, g, b]
+        console.log(changeColor)
+        box.style.backgroundColor = `rgb(${newcolor.join(',')})`
+    }
+
+    //裝搖桿監聽器
+    for (let input of inputs) {
+        input.addEventListener('input', inputColor)
+    }
+
+    // 設定按鈕
+    const btns = document.getElementsByClassName('btn')
+    const clickColor = () => {
+
+    }
+
+    // 幫按鈕裝監聽器
+    for (let btn of btns) {
+        btn.addEventListener('click', clickColor)
+    }
+    // 隨機數值
+    const getRandom = () => {
+        return Math.round(Math.random() * 255)
     }
 
 

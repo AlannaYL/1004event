@@ -48,7 +48,7 @@
 <script>
     const box = document.getElementById('box')
     const ps = document.getElementsByTagName('p')
-    // let color = [0, 0, 0]
+    let color = [0, 0, 0]
 
     // 搖桿
     const inputs = document.getElementsByTagName('input')
@@ -56,9 +56,9 @@
         let r = inputs[0].value
         let g = inputs[1].value
         let b = inputs[2].value
-        let newColor = [r, g, b]
-        console.log(changeColor)
-        box.style.backgroundColor = `rgb(${newcolor.join(',')})`
+        color = [r, g, b]
+        ps.innextext = color
+        box.style.backgroundColor = `rgb(${color.join(',')})`
     }
 
     //裝搖桿監聽器
@@ -69,9 +69,17 @@
     // 設定按鈕
     const btns = document.getElementsByClassName('btn')
     const clickColor = () => {
+        let r = btns[0].value
+        let g = btns[1].value
+        let b = btns[2].value
 
+        r = inputs[0].value
+        g = inputs[1].value
+        b = inputs[2].value
+        getRandom(inputColor)
     }
 
+    console.log(clickColor)
     // 幫按鈕裝監聽器
     for (let btn of btns) {
         btn.addEventListener('click', clickColor)

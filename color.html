@@ -69,14 +69,14 @@
     // 設定按鈕
     const btns = document.getElementsByClassName('btn')
     const clickColor = () => {
-        let r = btns[0].value
-        let g = btns[1].value
-        let b = btns[2].value
+        let r = btns[0]
+        let g = btns[1]
+        let b = btns[2]
 
         r = inputs[0].value
         g = inputs[1].value
         b = inputs[2].value
-        getRandom(inputColor)
+        getRandom(inputColor())
     }
 
     console.log(clickColor)
@@ -86,7 +86,7 @@
     }
     // 隨機數值
     const getRandom = () => {
-        return Math.round(Math.random() * 255)
+        return Math.round(Math.random() * 255 + 1)
     }
 
 

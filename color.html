@@ -49,15 +49,20 @@
     const box = document.getElementById('box')
     const ps = document.getElementsByTagName('p')
     let color = [0, 0, 0]
+    let r = 0
+    let g = 0
+    let b = 0
 
     // 搖桿
     const inputs = document.getElementsByTagName('input')
     const inputColor = () => {
         let r = inputs[0].value
+        ps[0].innerText = r
         let g = inputs[1].value
+        ps[1].innerText = g
         let b = inputs[2].value
+        ps[2].innerText = b
         color = [r, g, b]
-        ps.innextext = color
         box.style.backgroundColor = `rgb(${color.join(',')})`
     }
 
@@ -67,16 +72,25 @@
     }
 
     // 設定按鈕
-    const btns = document.getElementsByClassName('btn')
+    const btns = document.getElementsByTagName('button')
     const clickColor = () => {
-        let r = btns[0]
-        let g = btns[1]
-        let b = btns[2]
+        r = getRandom()
+        g = getRandom()
+        b = getRandom()
 
-        r = inputs[0].value
-        g = inputs[1].value
-        b = inputs[2].value
-        getRandom(inputColor())
+        inputs[0].value = r
+        inputs[1].value = g
+        inputs[2].value = b
+
+        btns[0].value = r
+        btns[1].value = g
+        btns[2].value = b
+
+        ps[0].innerText = r
+        ps[1].innerText = g
+        ps[2].innerText = b
+        color = [r, g, b]
+        box.style.backgroundColor = `rgb(${color.join(',')})`
     }
 
     console.log(clickColor)
@@ -86,7 +100,7 @@
     }
     // 隨機數值
     const getRandom = () => {
-        return Math.round(Math.random() * 255 + 1)
+        return Math.round(Math.random() * 255)
     }
 
 
